@@ -19,7 +19,7 @@ bool NetClient::Connect(const std::string& host, uint16_t port)
 }
 bool NetClient::Connect(const std::string& host, const std::string& service)
 {
-	boost::asio::ip::tcp::resolver resolver(GetSocket().get_io_service());
+	boost::asio::ip::tcp::resolver resolver(GetSocket().get_executor().context());
 	boost::asio::ip::tcp::resolver::query q(host, service);
 	m_endpointStart = resolver.resolve(q);
 	return Connect(m_endpointStart);
